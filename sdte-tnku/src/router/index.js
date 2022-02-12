@@ -17,7 +17,8 @@ const routes = [
   {
     path: '/result/:keyword/:type', 
     name:"Result", 
-    component: Result},
+    component: Result
+  },
 ];
 
 const router = createRouter({
