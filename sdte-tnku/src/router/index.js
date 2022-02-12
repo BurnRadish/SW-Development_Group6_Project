@@ -5,7 +5,7 @@ import Result from '../views/Result'
 
 const routes = [
     //{path: '/', name:"App", component: Home},
-    {path: '/detail/:place_id/:type', name:"Detail", component: Detail},
+    {path: '/detail/:place_id/:categorycodes', name:"Detail", component: Detail},
     {path: '/result/:keyword/:type', name:"Result", component: Result},
 
 ];
