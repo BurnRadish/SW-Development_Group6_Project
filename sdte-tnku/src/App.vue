@@ -1,26 +1,44 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<div>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#e3cb12">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+           
+          <li class="nav-item">
+           
+            <router-link class="navbar-brand on-active" aria-current="page" to="/">
+            <img src="./assets/compass.svg" alt="" width="30" height="24" class="d-inline-block align-text-top"> 
+            Home
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="navbar-brand" to="Result">Result</router-link>
+          </li>
+          <!-- เอาออกที่หลัง -->
+          <li class="nav-item">
+            <router-link class="navbar-brand" to="Detail">Details</router-link>
+          </li>
+          <!-- เอาออกที่หลัง -->
+        </ul>
+    </div>
+  </nav>
+   <router-view/>
+</div>
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import * as name from 'bootstrap/dist/js/bootstrap.esm'
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name:'App',
+  data() {
+    return {
+      
+    }
+  },
+  mounted(){
+    // console.log(Alert);
+    console.log(name.Alert)
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
