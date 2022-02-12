@@ -13,6 +13,7 @@
             <input v-model="keyword" type="text" class="form-control">
             <button class="btn btn-outline-secondary" type="button" @click="searchLocation()">ค้นหา</button>
             
+            <router-view></router-view>
         </div>
     </section>
 </template>
@@ -27,8 +28,7 @@
         },
         methods:{
             searchLocation(){
-                console.log("Pressed")
-                
+              this.$router.push({ path: `/result/${this.keyword}/${this.type}` });
             }
         }
     }
