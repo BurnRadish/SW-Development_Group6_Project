@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import 'dotenv/config'
 import axios from 'axios'
 export default {
     data(){
