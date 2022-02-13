@@ -42,7 +42,7 @@ export default {
         this.type = this.$route.params.type;
         let header = {
             "Accept-Language" : "TH",
-            "Authorization" : "Bearer " + "GBvKCjacR6TmFHvWikQ6S9relG0v5kQ4m((Hj(ExKMbovZLNbdKizj4Dye6O6497u=2"/*process.env.VUE_APP_API_KEY*/,
+            "Authorization" : "Bearer " + process.env.VUE_APP_API_KEY,
         }
         if(this.type == "RESTAURANT"){
             axios.get("https://tatapi.tourismthailand.org/tatapi/v5/restaurant/" + this.place_id,{headers:header})

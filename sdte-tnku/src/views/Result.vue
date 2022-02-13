@@ -28,7 +28,7 @@
         longitude: '',
         geolocation: '',
         categorycodes: this.$route.params.type,
-        token: "GBvKCjacR6TmFHvWikQ6S9relG0v5kQ4m((Hj(ExKMbovZLNbdKizj4Dye6O6497u=2"/*process.env.VUE_APP_API_KEY*/,
+        token: process.env.VUE_APP_API_KEY,
         info: null
       }
     },

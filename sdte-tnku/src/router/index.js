@@ -5,7 +5,11 @@ import Result from '../views/Result'
 import Main from "../views/Main.vue"
 
 const routes = [
-  {path: "/",name: "Main",component: Main},
+  {
+    path: "/",
+    name: "Main",
+    component: Main
+  },
   {
     path: "/detail/:place_id/:type",
     name: "Detail",
