@@ -11,14 +11,6 @@
             Home
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link class="navbar-brand" to="Result">Result</router-link>
-          </li>
-          <!-- เอาออกที่หลัง -->
-          <li class="nav-item">
-            <router-link class="navbar-brand" to="Detail">Details</router-link>
-          </li>
-          <!-- เอาออกที่หลัง -->
         </ul>
     </div>
   </nav>
