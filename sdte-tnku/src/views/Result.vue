@@ -38,7 +38,7 @@
     },
     methods:{
       sentInfo(placeid){
-        this.$router.push({ path: `/detail/${placeid}/${this.categorycodes}` });
+        this.$router.push({ path: '/detail/' + placeid + '/' + this.categorycodes });
       },
       getlocation(){
         navigator.geolocation.getCurrentPosition(

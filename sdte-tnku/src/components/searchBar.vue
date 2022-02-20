@@ -3,7 +3,6 @@
         <div class="input-group mb-3">
             <div class="col-2">
                 <select class="form-select" v-model="type">
-                    <option>ALL</option>
                     <option>ATTRACTION</option>
                     <option>RESTAURANT</option>
                     <option>ACCOMMODATION</option>
@@ -23,12 +22,12 @@
         data() {
         return {
             keyword: "",
-            type: "ALL"
+            type: ""
         }
         },
         methods:{
             searchLocation(){
-                this.$router.push({ `/result/${this.keyword}/${this.type}` });
+              this.$router.push({ path: '/result/' + this.keyword + '/' + this.type });
             }
         }
     }
