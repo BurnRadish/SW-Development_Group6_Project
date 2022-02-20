@@ -1,13 +1,13 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Home from "@/components/HelloWorld.vue";
 import Detail from "@/views/Detail.vue";
 import Result from '../views/Result'
+import Main from "../views/Main.vue"
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    name: "Main",
+    component: Main
   },
   {
     path: "/detail/:place_id/:type",
@@ -15,8 +15,8 @@ const routes = [
     component: Detail,
   },
   {
-    path: '/result/:keyword/:type',
-    name:"Result",
+    path: '/result/:keyword/:type', 
+    name:"Result", 
     component: Result
   },
 ];
