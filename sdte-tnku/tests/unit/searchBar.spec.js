@@ -1,5 +1,5 @@
 import {render, fireEvent, screen} from '@testing-library/vue'
-import Component from '../src/components/searchBar.vue'
+import Component from '../../src/components/searchBar.vue'
 
 describe('Test v-model', () => {
         test('searchbar case 1', async () => {
