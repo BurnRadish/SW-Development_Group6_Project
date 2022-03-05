@@ -2,7 +2,7 @@ import {render, fireEvent, screen} from '@testing-library/vue'
 import Component from '../src/components/searchBar.vue'
 
 describe('Test v-model', () => {
-        test('searchbar case 1', async () => {
+        test('searchbar case 1 Thai word input', async () => {
             const {getByTestId} = render(Component)
         
             const input = getByTestId('input')
@@ -11,7 +11,7 @@ describe('Test v-model', () => {
             expect(input.closest("input").value).toEqual("ครัวสมศรี")
         })
 
-        test('searchbar case 2', async () => {
+        test('searchbar case 2 English word input', async () => {
             const {getByTestId} = render(Component)
         
             const input = getByTestId('input')
@@ -20,7 +20,7 @@ describe('Test v-model', () => {
             expect(input.closest("input").value).toEqual("Restaurant")
         })
 
-        test('searchbar case 3', async () => {
+        test('searchbar case 3 Special character input', async () => {
             const {getByTestId} = render(Component)
         
             const input = getByTestId('input')
