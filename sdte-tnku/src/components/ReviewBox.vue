@@ -1,8 +1,4 @@
 <template>
-<section>
-    <div class="box">
-    <div class="row">
-      <div class="col-3"  v-for="n in 4" :key="n">
         <div class="card">
           <div class="card-body">
             <div class="d-flex flex-start align-items-center">
@@ -27,12 +23,6 @@
 
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-  
-  
 </template>
 
 <script>
