@@ -29,32 +29,32 @@
         geolocation: '',
         categorycodes: this.$route.params.type,
         token: process.env.VUE_APP_API_KEY,
-        info: null
-      }
+        info: null  
+      } 
     },
     created () {
-      this.getlocation();
+      // this.getlocation();
       this.getInfo();
     },
     methods:{
       sentInfo(placeid){
         this.$router.push({ path: '/detail/' + placeid + '/' + this.categorycodes });
       },
-      getlocation(){
-        navigator.geolocation.getCurrentPosition(
-          position => {
-            this.latitude = position.coords.latitude.toString(),
-            this.longitude = position.coords.longitude.toString()
-            this.geolocation = this.latitude.concat(',', this.longitude)
-            console.log('latitude:', this.latitude);
-            console.log('longtitude:', this.longitude);
-            console.log('geolocation of LO, LA:', this.geolocation)
-          },
-          error => {
-            console.log(error.message);
-          },
-        )
-      },
+      // getlocation(){
+      //   navigator.geolocation.getCurrentPosition(
+      //     position => {
+      //       this.latitude = position.coords.latitude.toString(),
+      //       this.longitude = position.coords.longitude.toString()
+      //       this.geolocation = this.latitude.concat(',', this.longitude)
+      //       console.log('latitude:', this.latitude);
+      //       console.log('longtitude:', this.longitude);
+      //       console.log('geolocation of LO, LA:', this.geolocation)
+      //     },
+      //     error => {
+      //       console.log(error.message);
+      //     },
+      //   )
+      // },
       getInfo(){
         axios
         .get('https://tatapi.tourismthailand.org/tatapi/v5/places/search', 
