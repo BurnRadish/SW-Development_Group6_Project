@@ -17,13 +17,24 @@
             </div>
 
             <!--Reviews area-->
-            
+            <div class="container">
+                <div class="row">
+                    <div class="col-3" v-for="(comment, index) in comment" :key="index">
+                        <Review :name="comment.name" :msg="comment.comment" :score="comment.rating"></Review>
+                    </div>
+                    
+                </div>
+            </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+import Review from '../components/ReviewBox.vue'
 export default {
+    components:{
+        Review,
+    },
     data(){
         return{
             type: '',
@@ -35,6 +46,7 @@ export default {
             lon:0,
             contact: "-",
             image_url: "",
+            comment: [],
         }
     },
     created(){
@@ -44,6 +56,14 @@ export default {
             "Accept-Language" : "TH",
             "Authorization" : "Bearer " + process.env.VUE_APP_API_KEY,
         }
+
+        axios.get("http://localhost:9000/getcomments/123456").then((res)=>{
+                console.log("Hehe boi")
+                console.log(res.data)
+                this.comment = res.data
+                console.log(this.comment)
+        });
+
         if(this.type == "RESTAURANT"){
             axios.get("https://tatapi.tourismthailand.org/tatapi/v5/restaurant/" + this.place_id,{headers:header})
             .then(res => {
