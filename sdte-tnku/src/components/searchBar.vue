@@ -10,7 +10,7 @@
             </div>
             
             <input v-model="keyword" type="text" class="form-control" data-testid="input">
-            <button class="btn btn-outline-secondary" type="button" @click="searchLocation()">ค้นหา</button>
+            <button class="btn btn-outline-secondary" type="button" @click="searchLocation()" data-testid='button'>ค้นหา</button>
             
             <router-view></router-view>
         </div>
