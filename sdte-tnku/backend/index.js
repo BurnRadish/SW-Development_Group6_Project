@@ -24,8 +24,14 @@ app.get("/getcomments/:id", async(req,res,next)=>{
   const session = client.startSession();
   try{
       result = await client.db("sdte").collection("comment").find({ place_id: id }).toArray();
-      res.status(200).send(result)
+      if(result.length === 0){
+        res.status(204).send('There is no comments found')
+      }else{
+        res.status(200).send(result)
+      }
+      
   }catch(error){
+      res.status(404)
       console.log(error)
   }
   console.log(result);
