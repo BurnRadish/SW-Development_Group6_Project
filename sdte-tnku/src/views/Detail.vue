@@ -58,7 +58,6 @@ export default {
         }
 
         axios.get("http://localhost:9000/getcomments/123456").then((res)=>{
-                console.log("Hehe boi")
                 console.log(res.data)
                 this.comment = res.data
                 console.log(this.comment)
