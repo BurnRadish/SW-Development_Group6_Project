@@ -1,0 +1,57 @@
+pipeline {
+    agent any
+    
+    environment {
+         VUE_API_KEY = "API TAT KEY"
+        
+    }
+    
+    stages {
+        stage('Pull code') {
+            steps {
+                git branch: 'master', url: 'https://github.com/BurnRadish/SW-Development_Group6_Project.git'
+            }
+        }
+        stage('Download dependency') {
+            steps {
+                dir("sdte-tnku"){
+                    sh 'npm install'
+                }
+            }
+        }
+        stage('create cypress.env.json'){
+            steps{
+                echo 'create cypress.env.json'
+            }
+        }
+        stage('add token cypress.env.json'){
+            steps{
+                echo 'add token in cypress.env.json'
+            }
+        }
+        stage('Unit Test'){
+            steps {
+                dir("sdte-tnku"){
+                    sh "npm run test:unit"
+                }
+            }
+        }
+        stage('Component Test และ E2E Test') {
+            steps {
+                dir("sdte-tnku"){
+                    sh 'npx cypress run'
+                }
+            }
+        }
+        stage('Deploy system') {
+            steps {
+                echo 'Deploy system with vercel'
+            }
+        }
+        stage('Notification') {
+            steps {
+                echo 'Waiting for notification via vercel'
+            }
+        }
+    }
+}

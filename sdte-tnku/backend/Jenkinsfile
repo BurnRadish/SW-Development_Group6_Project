@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+    
+    environment {
+        mongoDB = 'ลิงค์ต่อ cloud database ของ mongoDB'
+    } 
+    
+    stages {
+        stage('Pull code') {
+            steps {
+                git branch: 'master', url: 'https://github.com/BurnRadish/SW-Development_Group6_Project.git'
+            }
+        }
+        stage('Download dependency') {
+            steps {
+                dir("sdte-tnku"){
+                    dir("backend"){
+                        sh 'npm install'   
+                    }   
+                }
+            }
+        }
+        stage("Run unit test"){
+            steps {
+                dir("sdte-tnku"){
+                    dir("backend"){
+                        sh 'npm run test'   
+                    }
+                }
+            }
+        }
+        stage("Check unit test report"){
+            steps {
+                echo "check unit test report"
+            }
+        }
+        stage("Deploy"){
+            steps {
+                echo "Waiting for vercel to deploy"
+            }
+        }
+        stage("Notification"){
+            steps {
+                echo 'Waiting for email notification'
+            }
+        }
+    }
+}
