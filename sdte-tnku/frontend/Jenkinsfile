@@ -34,14 +34,18 @@ pipeline {
         stage('Unit Test'){
             steps {
                 dir("sdte-tnku"){
-                    sh "npm run test:unit"
+                    dir("frontend"){
+                        sh "npm run test:unit"   
+                    }
                 }
             }
         }
         stage('Component Test และ E2E Test') {
             steps {
                 dir("sdte-tnku"){
-                    sh 'npx cypress run'
+                    dir("frontend"){
+                        sh 'npx cypress run'
+                    }
                 }
             }
         }
