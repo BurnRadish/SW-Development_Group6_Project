@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Pull code') {
             steps {
-                git branch: 'master', url: 'https://github.com/BurnRadish/SW-Development_Group6_Project.git'
+                git branch: 'main', url: 'https://github.com/BurnRadish/SW-Development_Group6_Project.git'
             }
         }
         stage('Download dependency') {
