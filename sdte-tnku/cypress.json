@@ -1,8 +1,0 @@
-{
-  "projectId": "y754f2",
-  "baseUrl": "https://tatapi.tourismthailand.org/tatapi/v5",
-  "component": {
-    "componentFolder": "src",
-    "testFiles": "**/*.spec.ts"
-  }
-}
