@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --reporter mochawesome",
-    "test:coverage": "nyc npm run test",
+    "test:coverage": "nyc nyc --reporter=lcov --reporter=html npm mocha",
     "server": "nodemon index.js"
   },
   "author": "",
