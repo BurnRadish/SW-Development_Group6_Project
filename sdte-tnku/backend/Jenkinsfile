@@ -2,13 +2,13 @@ pipeline {
     agent any
     
     environment {
-        mongoDB = 'ลิงค์ต่อ cloud database ของ mongoDB'
+        mongoDB = 'mongoDB link'
     } 
     
     stages {
         stage('Pull code') {
             steps {
-                git branch: 'main', url: 'https://github.com/BurnRadish/SW-Development_Group6_Project.git'
+                checkout scm
             }
         }
         stage('Download dependency') {
