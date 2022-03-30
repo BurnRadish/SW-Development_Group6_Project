@@ -29,9 +29,17 @@ pipeline {
                 }
             }
         }
-        stage("Check unit test report"){
+        stage("Create unit test report"){
             steps {
-                echo "check unit test report"
+                publishHTML([
+                    allowMissing: false, 
+                    alwaysLinkToLastBuild: false, 
+                    keepAll: false, 
+                    reportDir: './sdte-tnku/backend/mochawesome-report', 
+                    reportFiles: 'mochawesome.html', 
+                    reportName: 'Unit test report', 
+                    reportTitles: ''
+                ])
             }
         }
         stage("Deploy"){
