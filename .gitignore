@@ -2,3 +2,4 @@
 sdte-tnku/backend/node_modules/
 sdte-tnku/backend/.env
 *.json
+sdte-tnku/backend/mochawesome-report
