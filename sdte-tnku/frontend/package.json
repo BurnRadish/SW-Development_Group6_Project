@@ -35,19 +35,6 @@
     "eslint-plugin-vue": "^7.0.0",
     "jest": "^27.0.5"
   },
-  "jest": {
-    "coverageReporters": [
-      "text"
-    ],
-    "reporters": [
-      "default",
-      "jest-junit"
-    ]
-  },
-  "jest-junit": {
-    "output": "output/coverage/junit/junit.xml",
-    "usePathForSuiteName": "true"
-  },
   "eslintConfig": {
     "root": true,
     "env": {
