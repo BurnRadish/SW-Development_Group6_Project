@@ -7,7 +7,8 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage --coverageDirectory=output/coverage/jest",
   },
   "dependencies": {
     "@popperjs/core": "^2.11.2",
@@ -33,6 +34,19 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0",
     "jest": "^27.0.5"
+  },
+  "jest": {
+    "coverageReporters": [
+      "text"
+    ],
+    "reporters": [
+      "default",
+      "jest-junit"
+    ]
+  },
+  "jest-junit": {
+    "output": "output/coverage/junit/junit.xml",
+    "usePathForSuiteName": "true"
   },
   "eslintConfig": {
     "root": true,
