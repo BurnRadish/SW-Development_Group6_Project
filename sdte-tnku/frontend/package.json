@@ -14,7 +14,7 @@
     "generate-report": "marge cypress/reports/mochareports/report.json -f report -o cypress/reports/mochareports",
     "posttest": "npm run combine-reports && npm run generate-report",
     "test:component-report": "npm run scripts && npm run posttest",
-    "test:unit-report": "nyc nyc --reporter=lcov --reporter=html npm run test:unit"
+    "test:unit-report": "vue-cli-service test:unit --coverage"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.2",
