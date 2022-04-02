@@ -69,8 +69,8 @@ pipeline {
                     allowMissing: false, 
                     alwaysLinkToLastBuild: false, 
                     keepAll: false, 
-                    reportDir: './sdte-tnku/frontend/mochawesome-report', 
-                    reportFiles: 'index.html', 
+                    reportDir: './sdte-tnku/frontend/cypress/reports/mochareports/', 
+                    reportFiles: 'report.html', 
                     reportName: 'Component Test Code Coverage report', 
                     reportTitles: ''
                 ])
