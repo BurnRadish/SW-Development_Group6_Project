@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Pull code') {
             steps {
-                git branch: 'main', url: 'https://github.com/BurnRadish/SW-Development_Group6_Project.git'
+                git branch: 'frontend', url: 'https://github.com/BurnRadish/SW-Development_Group6_Project.git'
             }
         }
         stage('Download dependency') {
@@ -38,6 +38,18 @@ pipeline {
                         sh "npm run test:unit"   
                     }
                 }
+            }
+        }
+        stage('...') {
+            steps {
+                clover(cloverReportDir: 'target/site', cloverReportFileName: 'clover.xml',
+                  // optional, default is: method=70, conditional=80, statement=80
+                  healthyTarget: [methodCoverage: 70, conditionalCoverage: 80, statementCoverage: 80],
+                  // optional, default is none
+                  unhealthyTarget: [methodCoverage: 50, conditionalCoverage: 50, statementCoverage: 50],
+                  // optional, default is none
+                  failingTarget: [methodCoverage: 0, conditionalCoverage: 0, statementCoverage: 0]
+                )
             }
         }
         stage('Component Test และ E2E Test') {
