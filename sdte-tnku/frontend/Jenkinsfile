@@ -31,35 +31,49 @@ pipeline {
                 echo 'add token in cypress.env.json'
             }
         }
-        stage('Unit Test'){
+        stage("Run Unit Test & Create Unit Test Report"){
             steps {
                 dir("sdte-tnku"){
                     dir("frontend"){
-                        sh "npm run test:unit"   
+                        sh "npm run test:unit-report"   
                     }
                 }
             }
         }
-        stage('...') {
+        stage("Create Unit Test Code Coverage Report"){
             steps {
-                clover(cloverReportDir: 'sdte-tnku/frontend/clover', cloverReportFileName: 'clover.xml',
-                  // optional, default is: method=70, conditional=80, statement=80
-                  healthyTarget: [methodCoverage: 70, conditionalCoverage: 80, statementCoverage: 80],
-                  // optional, default is none
-                  unhealthyTarget: [methodCoverage: 50, conditionalCoverage: 50, statementCoverage: 50],
-                  // optional, default is none
-                  failingTarget: [methodCoverage: 0, conditionalCoverage: 0, statementCoverage: 0]
-                )
+                publishHTML([
+                    allowMissing: false, 
+                    alwaysLinkToLastBuild: false, 
+                    keepAll: false, 
+                    reportDir: './sdte-tnku/frontend/coverage', 
+                    reportFiles: 'index.html', 
+                    reportName: 'Unit Test Code Coverage report', 
+                    reportTitles: ''
+                ])
             }
         }
-        stage('Component Test และ E2E Test') {
+        stage('Component Test & Create Component Test Report') {
             steps {
                 dir("sdte-tnku"){
                     dir("frontend"){
                         sh 'npm install cypress'
-                        sh 'npx cypress run --spec "cypress/integration/result.spec.js"'
+                        sh 'npm run test:component-report'
                     }
                 }
+            }
+        }
+        stage("Create Component Test Coverage Report"){
+            steps {
+                publishHTML([
+                    allowMissing: false, 
+                    alwaysLinkToLastBuild: false, 
+                    keepAll: false, 
+                    reportDir: './sdte-tnku/frontend/mochawesome-report', 
+                    reportFiles: 'index.html', 
+                    reportName: 'Component Test Code Coverage report', 
+                    reportTitles: ''
+                ])
             }
         }
         stage('Deploy system') {
