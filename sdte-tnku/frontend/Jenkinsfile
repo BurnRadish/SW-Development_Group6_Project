@@ -31,7 +31,7 @@ pipeline {
                 echo 'add token in cypress.env.json'
             }
         }
-        stage("Run Unit Test & Create Unit Test Report"){
+        stage("Unit Test Report"){
             steps {
                 dir("sdte-tnku"){
                     dir("frontend"){
@@ -56,7 +56,7 @@ pipeline {
                 ])
             }
         }
-        stage('Component Test & Create Component Test Report') {
+        stage('Component Test Report') {
             steps {
                 dir("sdte-tnku"){
                     dir("frontend"){
