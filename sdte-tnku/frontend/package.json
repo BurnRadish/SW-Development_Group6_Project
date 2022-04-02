@@ -7,7 +7,6 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "test": "jest",
     "clean:reports": "mkdir cypress\\reports && mkdir cypress\\reports\\mochareports",
     "pretest": "npm run clean:reports",
     "scripts": "cypress run --spec cypress/integration/result.spec.js",
@@ -15,7 +14,7 @@
     "generate-report": "marge cypress/reports/mochareports/report.json -f report -o cypress/reports/mochareports",
     "posttest": "npm run combine-reports && npm run generate-report",
     "test:component-report": "npm run scripts && npm run posttest",
-    "test:unit-report": "nyc nyc --reporter=lcov --reporter=html npm run test"
+    "test:unit-report": "nyc nyc --reporter=lcov --reporter=html npm run test:unit"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.2",
