@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Pull code') {
             steps {
-                git branch: 'frontend', url: 'https://github.com/BurnRadish/SW-Development_Group6_Project.git'
+                checkout scm
             }
         }
         stage('Download dependency') {
@@ -35,21 +35,24 @@ pipeline {
             steps {
                 dir("sdte-tnku"){
                     dir("frontend"){
-                        sh "npm run test:unit-report"   
+                        sh "npm run test:unit-report"
                     }
                 }
             }
         }
         stage("Create Unit Test Code Coverage Report"){
             steps {
+                clover(cloverReportDir: 'stde-tnku/frontend/coverage', cloverReportFileName: 'clover.xml',
+                healthyTarget: [methodCoverage: 70, conditionalCoverage: 80, statementCoverage: 80],
+                unhealthyTarget: [methodCoverage: 0, conditionalCoverage: 0, statementCoverage: 0],
+                failingTarget: [methodCoverage: 0, conditionalCoverage: 0, statementCoverage: 0])
                 publishHTML([
                     allowMissing: false, 
                     alwaysLinkToLastBuild: false, 
                     keepAll: false, 
-                    reportDir: './sdte-tnku/frontend/coverage', 
+                    reportDir: 'sdte-tnku/frontend/coverage/lcov-report', 
                     reportFiles: 'index.html', 
-                    reportName: 'Unit Test Code Coverage report', 
-                    reportTitles: ''
+                    reportName: 'Unit Test Code Coverage report',
                 ])
             }
         }
