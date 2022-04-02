@@ -8,7 +8,7 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "test": "jest",
-    "test:coverage": "jest --coverage --coverageDirectory=output/coverage/jest",
+    "test:unit-report": "jest --coverage --coverageDirectory=output/coverage/jest"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.2",
