@@ -1,6 +1,6 @@
 describe('Result Page Render', () => {
   it('Render Result Page', () => {
-    cy.visit('http://localhost:8080/result/KFC/ALL')
+    cy.visit('https://sw-development-group6-project.vercel.app/result/KFC/RESTAURANT')
   })
   it('Check component in Result Page', () => {
     cy.get('h1').contains('ผลลัพธ์การค้นหา "KFC"')
