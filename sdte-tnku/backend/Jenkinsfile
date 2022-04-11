@@ -2,13 +2,13 @@ pipeline {
     agent any
     
     environment {
-        mongoDB = 'ลิงค์ต่อ cloud database ของ mongoDB'
+        mongoDB = 'mongoDB link'
     } 
     
     stages {
         stage('Pull code') {
             steps {
-                git branch: 'master', url: 'https://github.com/BurnRadish/SW-Development_Group6_Project.git'
+                checkout scm
             }
         }
         stage('Download dependency') {
@@ -29,14 +29,55 @@ pipeline {
                 }
             }
         }
-        stage("Check unit test report"){
+        stage("Create unit test report"){
             steps {
-                echo "check unit test report"
+                publishHTML([
+                    allowMissing: false, 
+                    alwaysLinkToLastBuild: false, 
+                    keepAll: false, 
+                    reportDir: './sdte-tnku/backend/mochawesome-report', 
+                    reportFiles: 'mochawesome.html', 
+                    reportName: 'Unit test report', 
+                    reportTitles: ''
+                ])
+            }
+        }
+        stage("Create coverage test"){
+            steps {
+                dir("sdte-tnku"){
+                    dir("backend"){
+                        sh 'npm run test:coverage'   
+                    }
+                }
+            }
+        }
+        stage("Create coverage report"){
+            steps {
+                publishHTML([
+                    allowMissing: false, 
+                    alwaysLinkToLastBuild: false, 
+                    keepAll: false, 
+                    reportDir: './sdte-tnku/backend/coverage', 
+                    reportFiles: 'index.html', 
+                    reportName: 'Coverage report', 
+                    reportTitles: ''
+                ])
             }
         }
         stage("Deploy"){
             steps {
-                echo "Waiting for vercel to deploy"
+                script{
+                    def remote = [:]
+                    remote.name = "root"
+                    remote.host = '159.65.12.177'
+                    remote.user = 'root'
+                    remote.password = 'xitgmLwmp12q'
+                    remote.allowAnyHosts = true
+                    sshCommand remote: remote, command: "git clone -b matching_post https://github.com/BurnRadish/SW-Development_Group6_Project.git"
+                    sshCommand remote: remote, command: "docker-compose -f SW-Development_Group6_Project/sdte-tnku/docker-compose-build.yml build backend"
+                    sshCommand remote: remote, command: "docker run -d -e PORT=2077 -p 2077:2077 --name team-6-backend it62070180/team-6-backend:1.0.0"
+                    sshCommand remote: remote, command: "rm -r SW-Development_Group6_Project"
+                }
             }
         }
         stage("Notification"){
