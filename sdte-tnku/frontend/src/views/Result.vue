@@ -33,8 +33,7 @@
       } 
     },
     created () {
-      // this.getlocation();
-      this.getInfo();
+      console.log(this.token)
     },
     methods:{
       sentInfo(placeid){
