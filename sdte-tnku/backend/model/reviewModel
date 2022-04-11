@@ -1,0 +1,9 @@
+const mongoose = require('mongoose')
+
+const reviewSchema = mongoose.Schema({
+    placeId: String,
+    textReview: String,
+    username: String
+}, { versionKey: false })
+
+module.exports = reviewSchema
