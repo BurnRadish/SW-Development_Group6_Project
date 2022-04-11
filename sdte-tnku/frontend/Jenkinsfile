@@ -9,13 +9,15 @@ pipeline {
     stages {
         stage('Pull code') {
             steps {
-                git branch: 'master', url: 'https://github.com/BurnRadish/SW-Development_Group6_Project.git'
+                checkout scm
             }
         }
         stage('Download dependency') {
             steps {
                 dir("sdte-tnku"){
-                    sh 'npm install'
+                    dir("frontend"){
+                        sh 'npm install'   
+                    }   
                 }
             }
         }
@@ -29,23 +31,68 @@ pipeline {
                 echo 'add token in cypress.env.json'
             }
         }
-        stage('Unit Test'){
+        stage("Unit Test Report"){
             steps {
                 dir("sdte-tnku"){
-                    sh "npm run test:unit"
+                    dir("frontend"){
+                        sh "npm run test:unit-report"
+                    }
                 }
             }
         }
-        stage('Component Test และ E2E Test') {
+        stage("Create Unit Test Code Coverage Report"){
+            steps {
+                clover(cloverReportDir: 'stde-tnku/frontend/coverage', cloverReportFileName: 'clover.xml',
+                healthyTarget: [methodCoverage: 70, conditionalCoverage: 80, statementCoverage: 80],
+                unhealthyTarget: [methodCoverage: 0, conditionalCoverage: 0, statementCoverage: 0],
+                failingTarget: [methodCoverage: 0, conditionalCoverage: 0, statementCoverage: 0])
+                publishHTML([
+                    allowMissing: false, 
+                    alwaysLinkToLastBuild: false, 
+                    keepAll: false, 
+                    reportDir: 'sdte-tnku/frontend/coverage/lcov-report', 
+                    reportFiles: 'index.html', 
+                    reportName: 'Unit Test Code Coverage report',
+                ])
+            }
+        }
+        stage('Component Test Report') {
             steps {
                 dir("sdte-tnku"){
-                    sh 'npx cypress run'
+                    dir("frontend"){
+                        sh 'npm install cypress'
+                        sh 'npm run test:component-report'
+                    }
                 }
+            }
+        }
+        stage("Create Component Test Coverage Report"){
+            steps {
+                publishHTML([
+                    allowMissing: false, 
+                    alwaysLinkToLastBuild: false, 
+                    keepAll: false, 
+                    reportDir: './sdte-tnku/frontend/cypress/reports/mochareports/', 
+                    reportFiles: 'report.html', 
+                    reportName: 'Component Test Code Coverage report', 
+                    reportTitles: ''
+                ])
             }
         }
         stage('Deploy system') {
             steps {
-                echo 'Deploy system with vercel'
+                script{
+                    def remote = [:]
+                    remote.name = "root"
+                    remote.host = '159.65.12.177'
+                    remote.user = 'root'
+                    remote.password = 'xitgmLwmp12q'
+                    remote.allowAnyHosts = true
+                    sshCommand remote: remote, command: "git clone -b matching_post https://github.com/BurnRadish/SW-Development_Group6_Project.git"
+                    sshCommand remote: remote, command: "docker-compose -f SW-Development_Group6_Project/sdte-tnku/docker-compose-build.yml build frontend"
+                    sshCommand remote: remote, command: "docker run -d -p 7777:7777 --name team-6-frontend ijerickoz/team-6-frontend:1.0.0"
+                    sshCommand remote: remote, command: "rm -r SW-Development_Group6_Project"
+                }
             }
         }
         stage('Notification') {
