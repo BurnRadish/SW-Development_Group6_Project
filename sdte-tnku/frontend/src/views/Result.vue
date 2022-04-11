@@ -33,6 +33,7 @@
       } 
     },
     created () {
+      this.getInfo();
       console.log(this.token)
     },
     methods:{
