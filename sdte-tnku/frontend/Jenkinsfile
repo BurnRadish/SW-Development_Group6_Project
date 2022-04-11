@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-         VUE_API_KEY = "API TAT KEY"
+         VUE_API_KEY = credentials('group6-API')
         
     }
     
