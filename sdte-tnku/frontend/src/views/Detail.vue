@@ -125,7 +125,7 @@ export default {
                 textReview: this.textReview,
                 username: this.username
             }
-            axios.post('159.223.45.216:2077/addreview', data)
+            axios.post('https://backend-sdte.herokuapp.com/addreview', data)
             .then(() => {
                 window.location.reload();
             }) 
