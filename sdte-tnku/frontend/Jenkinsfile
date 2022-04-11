@@ -88,8 +88,8 @@ pipeline {
                     remote.user = 'root'
                     remote.password = 'xitgmLwmp12q'
                     remote.allowAnyHosts = true
-                    sshCommand remote: remote, command: "git clone -b matching_post https://github.com/BurnRadish/SW-Development_Group6_Project.git"
-                    sshCommand remote: remote, command: "docker-compose -f SW-Development_Group6_Project/sdte-tnku/docker-compose-build.yml build frontend"
+                    sshCommand remote: remote, command: "git clone https://github.com/BurnRadish/SW-Development_Group6_Project.git"
+                    sshCommand remote: remote, command: "docker-compose -f SW-Development_Group6_Project/sdte-tnku/Docker-compose-build.yml build frontend"
                     sshCommand remote: remote, command: "docker run -d -p 7777:7777 --name team-6-frontend ijerickoz/team-6-frontend:1.0.0"
                     sshCommand remote: remote, command: "rm -r SW-Development_Group6_Project"
                 }
