@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-         VUE_API_KEY = credentials('group6-API')
+         VUE_APP_API_KEY = credentials('group6-API')
         
     }
     
