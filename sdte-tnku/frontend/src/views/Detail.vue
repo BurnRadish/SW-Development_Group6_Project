@@ -61,7 +61,7 @@ export default {
             image_url: "",
             comment: [],
             textReview: null, 
-            reviewData: []
+            reviewData: [],
         }
     },
     created(){
@@ -73,8 +73,7 @@ export default {
             const data = {
                 placeId: this.$route.params.place_id
             }
-            console.log(this.$route.params.place_id)
-            axios.post(`http://localhost:3000/review`, data)
+            axios.post(`https://backend-sdte.herokuapp.com/review`, data)
             .then((res) => {
                 this.reviewData = res.data.reviewData;
             })
