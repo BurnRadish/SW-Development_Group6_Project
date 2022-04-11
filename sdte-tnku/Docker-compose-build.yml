@@ -1,0 +1,8 @@
+version: "3"
+services:
+  frontend:
+    image: ijerickoz/team-6-frontend:1.0.0
+    build: ./frontend
+  backend:
+    image: it62070180/team-6-backend:1.0.0
+    build: ./backend
